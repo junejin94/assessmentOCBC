@@ -62,7 +62,6 @@ err_msg_top_up_get_debt_fail = 'Failed to extract client\'s debt data:\n{}'
 err_msg_top_up_more_than_two_decimal = 'Please key in amount up to 2 decimal place only.'
 
 # - Pay
-
 err_msg_pay_cannot_pay_to_self = 'Unable to pay to oneself.'
 err_msg_pay_no_amount_arg = 'Please key in the amount you wish to pay'
 err_msg_pay_restructure_debt = 'Failed to update debt information:\n{}'
@@ -79,3 +78,9 @@ debtor_key = 'debtor'
 amount_key = 'amount'
 creditor_key = 'creditor'
 credit_debt_key = 'credit_debt'
+
+# Unit Test Flag
+test_input = True
+test_login = True
+test_topup = True
+test_pay = True

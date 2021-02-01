@@ -1,6 +1,7 @@
 import config
 import dbhelper as db
 from decimal import Decimal
+from os import getcwd, sep, remove, path
 
 
 def connect_to_db():
@@ -341,6 +342,60 @@ def process_pay_credit_debt(client_bal, credit_debt, amount):
     payload = {config.bal_key: bal, config.credit_debt_key: credit_debt}
 
     return status, msg, payload
+
+
+def init_test_db():
+    status = True
+    msg = ''
+
+    config.db_path = getcwd() + sep + 'unit_test.db'
+
+    if path.isfile(config.db_path):
+        try:
+            remove(config.db_path)
+        except OSError as error:
+            status = False
+            msg = error
+
+    if not status:
+        return status, msg
+
+    status, msg = connect_to_db()
+
+    if not status:
+        return status, msg
+
+    status, msg = db.insert_client('a')
+
+    if not status:
+        return status, msg
+
+    status, msg = db.insert_client('b')
+
+    if not status:
+        return status, msg
+
+    status, msg = db.insert_client('c')
+
+    if not status:
+        return status, msg
+
+    status, msg = db.update_balance('a', 1000)
+
+    if not status:
+        return status, msg
+
+    status, msg = db.insert_debt('a', 'b', 1000)
+
+    if not status:
+        return status, msg
+
+    status, msg = db.insert_debt('a', 'c', 1000)
+
+    if not status:
+        return status, msg
+
+    return status, msg
 
 
 def validate_amount(raw):
