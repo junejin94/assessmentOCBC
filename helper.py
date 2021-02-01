@@ -166,6 +166,9 @@ def get_pay_name_amount(data):
         for raw_argument in name_argument:
             argument1 += raw_argument + (' ' if len(name_argument) > 1 else '')
 
+    if len(name_argument) > 1:
+        argument1 = argument1[:-1]
+
     return status, msg, argument1, argument2
 
 
